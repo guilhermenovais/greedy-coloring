@@ -7,6 +7,7 @@ class ListaEncadeada;
 class Vertice {
     public:
         Vertice();
+        int GetChave();
     private:
         ListaEncadeada* adjacentes;
         int rotulo;
