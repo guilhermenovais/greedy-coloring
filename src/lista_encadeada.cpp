@@ -1,5 +1,5 @@
 #include "../include/lista_encadeada.hpp"
-#include "../include/tipo_celula.hpp"
+#include "../include/vertice.hpp"
 
 ListaEncadeada::ListaEncadeada() {
     tamanho = 0;
@@ -8,11 +8,11 @@ ListaEncadeada::ListaEncadeada() {
 }
 
 ListaEncadeada::~ListaEncadeada() {
-    Limpa();
+    limpa();
     delete primeiro;
 }
 
-TipoCelula* ListaEncadeada::Posiciona(int pos, bool antes=false) {
+TipoCelula* ListaEncadeada::posiciona(int pos, bool antes=false) {
     TipoCelula *p; 
     int i;
     if((pos > tamanho) || (pos <= 0))
@@ -26,19 +26,19 @@ TipoCelula* ListaEncadeada::Posiciona(int pos, bool antes=false) {
     return p;
 }
 
-Vertice* ListaEncadeada::GetItem(int pos) {
+Vertice* ListaEncadeada::getItem(int pos) {
     TipoCelula* p;
-    p = Posiciona(pos);
+    p = posiciona(pos);
     return p->item;
 }
 
-void ListaEncadeada::SetItem(Vertice* item, int pos) {
+void ListaEncadeada::setItem(Vertice* item, int pos) {
     TipoCelula* p;
-    p = Posiciona(pos);
+    p = posiciona(pos);
     p->item = item;
 }
 
-void ListaEncadeada::InsereInicio(Vertice* item) {
+void ListaEncadeada::insereInicio(Vertice* item) {
     TipoCelula *nova;
     nova = new TipoCelula();
     nova->item = item;
@@ -49,7 +49,7 @@ void ListaEncadeada::InsereInicio(Vertice* item) {
         ultimo = nova;
 };
 
-void ListaEncadeada::InsereFinal(Vertice* item) {
+void ListaEncadeada::insereFinal(Vertice* item) {
     TipoCelula *nova;
     nova = new TipoCelula();
     nova->item = item;
@@ -58,9 +58,9 @@ void ListaEncadeada::InsereFinal(Vertice* item) {
     tamanho++;
 }
 
-void ListaEncadeada::InserePosicao(Vertice* item, int pos) { 
+void ListaEncadeada::inserePosicao(Vertice* item, int pos) { 
     TipoCelula *p, *nova;
-    p = Posiciona(pos,true); // posiciona na célula anterior
+    p = posiciona(pos,true); // posiciona na célula anterior
     nova = new TipoCelula();
     nova->item = item;
     nova->prox = p->prox;
@@ -70,7 +70,7 @@ void ListaEncadeada::InserePosicao(Vertice* item, int pos) {
         ultimo = nova;
 };
 
-Vertice* ListaEncadeada::RemoveInicio() {
+Vertice* ListaEncadeada::removeInicio() {
     Vertice* aux;
     TipoCelula *p;
     if (tamanho == 0)
@@ -85,13 +85,13 @@ Vertice* ListaEncadeada::RemoveInicio() {
     return aux;
 }
 
-Vertice* ListaEncadeada::RemoveFinal() {
+Vertice* ListaEncadeada::removeFinal() {
     Vertice* aux;
     TipoCelula *p;
     if (tamanho == 0)
         throw "ERRO: Lista vazia!";
     // posiciona p na celula anterior à última
-    p = Posiciona(tamanho, true);
+    p = posiciona(tamanho, true);
     p->prox = nullptr;
     tamanho--;
     aux = ultimo->item;
@@ -100,13 +100,13 @@ Vertice* ListaEncadeada::RemoveFinal() {
     return aux;
 }
 
-Vertice* ListaEncadeada::RemovePosicao(int pos) {
+Vertice* ListaEncadeada::removePosicao(int pos) {
     Vertice* aux;
     TipoCelula *p, *q;
     if (tamanho == 0)
         throw "ERRO: Lista vazia!";
     // posiciona p na celula anterior à pos
-    p = Posiciona(pos, true);
+    p = posiciona(pos, true);
     q = p->prox;
     p->prox = q->prox;
     tamanho--;
@@ -117,14 +117,14 @@ Vertice* ListaEncadeada::RemovePosicao(int pos) {
     return aux;
 }
 
-Vertice* ListaEncadeada::Pesquisa(int c) {
+Vertice* ListaEncadeada::pesquisa(int c) {
     Vertice* aux = nullptr;
     TipoCelula *p;
     if (tamanho == 0)
         throw "ERRO: Lista vazia!";
     p = primeiro->prox;
     while (p!= nullptr) {
-        if (p->item->GetChave() == c) {
+        if (p->item->getChave() == c) {
             aux = p->item;
             break;
         }
@@ -133,7 +133,7 @@ Vertice* ListaEncadeada::Pesquisa(int c) {
     return aux;
 };
 
-void ListaEncadeada::Limpa() {
+void ListaEncadeada::limpa() {
     TipoCelula *p;
     p = primeiro->prox;
     while (p!=nullptr) {
@@ -145,10 +145,10 @@ void ListaEncadeada::Limpa() {
     tamanho = 0;
 };
 
-int ListaEncadeada::GetTamanho() {
+int ListaEncadeada::getTamanho() {
     return tamanho;
 }
 
-bool ListaEncadeada::Vazia() {
+bool ListaEncadeada::vazia() {
     return tamanho == 0;
 }

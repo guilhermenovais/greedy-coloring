@@ -7,7 +7,7 @@ class ListaEncadeada;
 class Vertice {
     public:
         Vertice();
-        int GetChave();
+        int getChave();
         int getCor();
         ListaEncadeada* getAdjacentes();
     private:

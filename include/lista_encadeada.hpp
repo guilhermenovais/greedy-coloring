@@ -1,8 +1,6 @@
 #ifndef LISTA_ENCADEADA_HPP
 #define LISTA_ENCADEADA_HPP
 
-
-
 #include "tipo_celula.hpp"
 
 // Forward declaration de Vertice
@@ -10,25 +8,25 @@ class Vertice;
 
 class ListaEncadeada {
     public:
-        int GetTamanho();
-        bool Vazia();
+        int getTamanho();
+        bool vazia();
         ListaEncadeada();
         ~ListaEncadeada();
-        Vertice* GetItem(int pos);
-        void SetItem(Vertice* item, int pos);
-        void InsereInicio(Vertice* item);
-        void InsereFinal(Vertice* item);
-        void InserePosicao(Vertice* item, int pos);
-        Vertice* RemoveInicio();
-        Vertice* RemoveFinal();
-        Vertice* RemovePosicao(int pos);
-        Vertice* Pesquisa(int c);
-        void Limpa();
+        Vertice* getItem(int pos);
+        void setItem(Vertice* item, int pos);
+        void insereInicio(Vertice* item);
+        void insereFinal(Vertice* item);
+        void inserePosicao(Vertice* item, int pos);
+        Vertice* removeInicio();
+        Vertice* removeFinal();
+        Vertice* removePosicao(int pos);
+        Vertice* pesquisa(int c);
+        void limpa();
     private:
         int tamanho;
         TipoCelula* primeiro;
         TipoCelula* ultimo;
-        TipoCelula* Posiciona(int pos, bool antes);
+        TipoCelula* posiciona(int pos, bool antes);
 };
 
 #endif // LISTA_ENCADEADA_HPP
