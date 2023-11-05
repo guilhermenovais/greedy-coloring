@@ -16,8 +16,8 @@ SRC = src
 OBJ = obj
 INC = include
 BIN = bin
-OBJS = $(OBJ)/grafo.o $(OBJ)/lista_encadeada.o $(OBJ)/sorting.o $(OBJ)/vertice.o $(OBJ)/main.o
-HDRS = $(INC)/grafo.hpp $(INC)/lista_encadeada.hpp $(INC)/sorting.hpp $(INC)/vertice.hpp
+OBJS = $(OBJ)/grafo.o $(OBJ)/lista_encadeada.o $(OBJ)/sorting.o $(OBJ)/tipo_celula.o $(OBJ)/vertice.o $(OBJ)/main.o
+HDRS = $(INC)/grafo.hpp $(INC)/lista_encadeada.hpp $(INC)/sorting.hpp $(INC)/tipo_celula.hpp $(INC)/vertice.hpp
 CFLAGS = -c -g -I $(INC)
 
 EXE = $(BIN)/tp2.out
@@ -39,6 +39,9 @@ $(OBJ)/lista_encadeada.o: $(HDRS) $(SRC)/lista_encadeada.cpp
 
 $(OBJ)/sorting.o: $(HDRS) $(SRC)/sorting.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/sorting.o $(SRC)/sorting.cpp
+
+$(OBJ)/tipo_celula.o: $(HDRS) $(SRC)/tipo_celula.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/tipo_celula.o $(SRC)/tipo_celula.cpp
 
 $(OBJ)/vertice.o: $(HDRS) $(SRC)/vertice.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/vertice.o $(SRC)/vertice.cpp
