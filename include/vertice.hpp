@@ -6,7 +6,8 @@ class ListaEncadeada;
 
 class Vertice {
     public:
-        Vertice();
+        Vertice(int rotulo, int cor, ListaEncadeada* adjacentes);
+        ~Vertice();
         int getChave();
         int getCor();
         ListaEncadeada* getAdjacentes();
