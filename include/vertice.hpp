@@ -8,6 +8,8 @@ class Vertice {
     public:
         Vertice();
         int GetChave();
+        int getCor();
+        ListaEncadeada* getAdjacentes();
     private:
         ListaEncadeada* adjacentes;
         int rotulo;
