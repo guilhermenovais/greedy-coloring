@@ -50,8 +50,8 @@ clean:
 	rm -f $(EXE) $(OBJS) gmon.out
 
 run: all
-	./bin/tp1.out -a "0 & ( 1 | 2 )" 111
+	./bin/tp2.out
 
 test: all
-	valgrind --leak-check=full --show-leak-kinds=all ./bin/tp1.out -a "0 & ( 1 | 2 )" 011
-	gdb -args ./bin/tp1.out -a "0 & ( 1 | 2 )" 011
+	valgrind --leak-check=full --show-leak-kinds=all ./bin/tp2.out
+	gdb ./bin/tp2.out
