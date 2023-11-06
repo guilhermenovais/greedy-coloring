@@ -10,6 +10,7 @@ class Vertice {
         ~Vertice();
         int getChave();
         int getCor();
+        void setCor(int cor);
         ListaEncadeada* getAdjacentes();
     private:
         ListaEncadeada* adjacentes;

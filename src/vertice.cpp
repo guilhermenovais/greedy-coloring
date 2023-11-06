@@ -19,6 +19,10 @@ int Vertice::getCor() {
     return cor;
 }
 
+void Vertice::setCor(int cor) {
+    this->cor = cor;
+}
+
 ListaEncadeada* Vertice::getAdjacentes() {
     return adjacentes;
 }
