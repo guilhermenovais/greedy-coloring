@@ -13,7 +13,7 @@ Grafo::~Grafo() {
 }
 
 void Grafo::addVertice(int rotulo, std::string strAdjacentes) {
-    Vertice* vertice = vertices->pesquisa(rotulo);
+    Vertice* vertice = vertices->getItem(rotulo);
     for(int i = 0; i < strAdjacentes.length(); i++) {
         if(strAdjacentes[i] != ' ') {
             std::string strNum = "";
