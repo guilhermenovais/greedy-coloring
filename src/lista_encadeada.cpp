@@ -15,10 +15,10 @@ ListaEncadeada::~ListaEncadeada() {
 TipoCelula* ListaEncadeada::posiciona(int pos, bool antes=false) {
     TipoCelula *p; 
     int i;
-    if((pos > tamanho) || (pos <= 0))
+    if((pos > tamanho) || (pos < 0))
         throw "ERRO: Posicao Invalida!";
     p = primeiro;
-    for(i=1; i<pos; i++){
+    for(i=0; i<pos; i++){
         p = p->prox;
     }
     if(!antes)
