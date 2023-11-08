@@ -23,3 +23,12 @@ void Grafo::addVertice(int rotulo, std::string strAdjacentes) {
         vertice->getAdjacentes()->insereFinal(verticeAdjacente);
     }
 }
+
+void Grafo::colore(std::string strCores) {
+    std::istringstream streamCores(strCores);
+    std::string strCor;
+    for(int i = 0; i < vertices->getTamanho(); i++) {
+        streamCores >> strCor;
+        vertices->getItem(i)->setCor(std::stoi(strCor));
+    }
+}
