@@ -12,6 +12,7 @@ class Vertice {
         int getCor();
         void setCor(int cor);
         ListaEncadeada* getAdjacentes();
+        bool satisfazGuloso();
     private:
         ListaEncadeada* adjacentes;
         int rotulo;

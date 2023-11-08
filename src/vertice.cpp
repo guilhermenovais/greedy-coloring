@@ -26,3 +26,30 @@ void Vertice::setCor(int cor) {
 ListaEncadeada* Vertice::getAdjacentes() {
     return adjacentes;
 }
+
+bool Vertice::satisfazGuloso() {
+    if(cor == 0)
+        throw "A cor ainda não foi definida";
+    int coresMenores[cor - 1];
+    for(int i = 0; i < cor - 1; i++) {
+        coresMenores[i] = i + 1;
+    }
+    TipoCelula* celula = adjacentes->getPrimeiraCelula()->getProx();
+    while (celula != nullptr) {
+        int corAdjacente = celula->getItem()->getCor();
+        if(corAdjacente < cor) {
+            // zera posição da cor ao encontrá-la
+            coresMenores[corAdjacente - 1] = 0;
+        }
+        celula = celula->getProx();
+    }
+
+    // Verifica se alguma cor menor não foi encontrada
+    for(int i = 0; i < cor - 1; i++) {
+        if(coresMenores[i] != 0)
+            return false;
+    }
+
+    // Retorna true caso todas tenha sido encontradas;
+    return true;
+}
