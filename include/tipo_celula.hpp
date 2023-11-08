@@ -6,6 +6,8 @@
 class TipoCelula {
     public:
         TipoCelula();
+        TipoCelula* getProx();
+        Vertice* getItem();
     private:
         Vertice* item;
         TipoCelula* prox;
