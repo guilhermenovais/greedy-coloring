@@ -1,8 +1,23 @@
 #include <iostream>
+#include <sstream>
 #include <string>
 #include "../include/grafo.hpp"
 
 int main(void) {
-    Grafo grafo = Grafo(6);
-    grafo.addVertice(0, "1 3 5 4");
+    std::string linha;
+    std::getline(std::cin, linha);
+    std::istringstream stream(linha);
+    std::string qtdVertices, tipoOrdenacao;
+    stream >> tipoOrdenacao;
+    stream >> qtdVertices;
+
+    Grafo grafo = Grafo(std::stoi(qtdVertices));
+
+    int rotulo = 0;
+    while(rotulo < std::stoi(qtdVertices)) {
+        std::getline(std::cin, linha);
+        grafo.addVertice(rotulo, linha);
+        rotulo++;
+    }
+    return 0;
 }
