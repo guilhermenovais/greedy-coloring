@@ -32,3 +32,13 @@ void Grafo::colore(std::string strCores) {
         vertices->getItem(i)->setCor(std::stoi(strCor));
     }
 }
+
+bool Grafo::eGuloso() {
+    TipoCelula* celula = vertices->getPrimeiraCelula()->getProx();
+    while(celula != nullptr) {
+        bool satisfaz = celula->getItem()->satisfazGuloso();
+        if(!satisfaz) return false;
+        celula = celula->getProx();
+    }
+    return true;
+}
