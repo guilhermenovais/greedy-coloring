@@ -19,5 +19,9 @@ int main(void) {
         grafo.addVertice(rotulo, linha);
         rotulo++;
     }
+
+    std::getline(std::cin, linha);
+    grafo.colore(linha);
+
     return 0;
 }
