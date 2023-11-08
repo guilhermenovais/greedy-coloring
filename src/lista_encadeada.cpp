@@ -152,3 +152,7 @@ int ListaEncadeada::getTamanho() {
 bool ListaEncadeada::vazia() {
     return tamanho == 0;
 }
+
+TipoCelula* ListaEncadeada::getPrimeiraCelula() {
+    return primeiro;
+}
