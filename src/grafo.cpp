@@ -42,3 +42,29 @@ bool Grafo::eGuloso() {
     }
     return true;
 }
+
+void Grafo::ordena(char tipoOrdenacao) {
+    switch (tipoOrdenacao) {
+        case 'b':
+            Sorting::bubbleSort(vertices);
+            break;
+        case 's':
+            Sorting::selectionSort(vertices);
+            break;
+        case 'i':
+            Sorting::insertionSort(vertices);
+            break;
+        case 'q':
+            Sorting::quicksort(vertices);
+            break;
+        case 'm':
+            Sorting::mergesort(vertices);
+            break;
+        case 'p':
+            Sorting::heapsort(vertices);
+            break;
+        case 'y':
+            Sorting::customSort(vertices);
+            break;
+    }
+}
