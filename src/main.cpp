@@ -23,6 +23,8 @@ int main(void) {
     std::getline(std::cin, linha);
     grafo.colore(linha);
 
+    grafo.ordena(tipoOrdenacao[0]);
+
     std::cout << grafo.eGuloso();
     return 0;
 }
