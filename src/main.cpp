@@ -23,5 +23,6 @@ int main(void) {
     std::getline(std::cin, linha);
     grafo.colore(linha);
 
+    std::cout << grafo.eGuloso();
     return 0;
 }
