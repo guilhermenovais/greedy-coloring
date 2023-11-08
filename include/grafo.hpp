@@ -10,7 +10,7 @@ class Grafo {
     public:
         Grafo(int qtdVertices);
         ~Grafo();
-        bool eGuloso(char tipoOrdenacao);
+        bool eGuloso();
         void addVertice(int rotulo, std::string strAdjacentes);
         void colore(std::string strCores);
     private:
