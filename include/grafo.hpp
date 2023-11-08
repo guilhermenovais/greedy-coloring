@@ -3,6 +3,7 @@
 
 #include "lista_encadeada.hpp"
 #include "vertice.hpp"
+#include <sstream>
 #include <string>
 
 class Grafo {

@@ -14,16 +14,12 @@ Grafo::~Grafo() {
 
 void Grafo::addVertice(int rotulo, std::string strAdjacentes) {
     Vertice* vertice = vertices->getItem(rotulo);
-    for(int i = 0; i < strAdjacentes.length(); i++) {
-        if(strAdjacentes[i] != ' ') {
-            std::string strNum = "";
-            strNum.push_back(strAdjacentes[i]);
-            while(i + 1 < strAdjacentes.length() && strAdjacentes[i + 1] != ' ') {
-                i++;
-                strNum.push_back(strAdjacentes[i]);
-            }
-            Vertice* verticeAdjacente = vertices->getItem(std::stoi(strNum));
-            vertice->getAdjacentes()->insereFinal(verticeAdjacente);
-        }
+    std::istringstream streamAdjacente(strAdjacentes);
+    std::string strQtdAdjacentes, strRotuloVertice;
+    streamAdjacente >> strQtdAdjacentes;
+    for(int i = 0; i < std::stoi(strQtdAdjacentes); i++) {
+        streamAdjacente >> strRotuloVertice;
+        Vertice* verticeAdjacente = vertices->getItem(std::stoi(strRotuloVertice));
+        vertice->getAdjacentes()->insereFinal(verticeAdjacente);
     }
 }
