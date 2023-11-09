@@ -6,6 +6,7 @@
 #include <sstream>
 #include <string>
 #include "sorting.hpp"
+#include <iostream>
 
 class Grafo {
     public:
@@ -15,6 +16,7 @@ class Grafo {
         void addVertice(int rotulo, std::string strAdjacentes);
         void colore(std::string strCores);
         void ordena(char tipoOrdenacao);
+        void imprimeVertices();
     private:
         ListaEncadeada* vertices;
 };

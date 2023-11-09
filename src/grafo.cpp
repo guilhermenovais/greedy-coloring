@@ -68,3 +68,11 @@ void Grafo::ordena(char tipoOrdenacao) {
             break;
     }
 }
+
+void Grafo::imprimeVertices() {
+    TipoCelula* celula = vertices->getPrimeiraCelula()->getProx();
+    while(celula != nullptr) {
+        std::cout << ' ' << celula->getItem()->getChave();
+        celula = celula->getProx();
+    }
+}
