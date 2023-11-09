@@ -65,7 +65,7 @@ void Sorting::trocaCelulas(TipoCelula* celula1, TipoCelula* celula2) {
         celula2->anterior = celula1->anterior;
         celula2->prox = celula1;
         celula1->anterior = celula2;
-        // Caso a célula 1 esteja imediatamente a frente da célula 2
+    // Caso a célula 1 esteja imediatamente a frente da célula 2
     } else if(celula1->anterior == celula2) {
         if(celula1->prox != nullptr)
             celula1->prox->anterior = celula2;
@@ -75,18 +75,18 @@ void Sorting::trocaCelulas(TipoCelula* celula1, TipoCelula* celula2) {
         celula1->anterior = celula2->anterior;
         celula1->prox = celula2;
         celula2->anterior = celula1;
+    // Caso as células não sejam adjacentes
     } else {
+        TipoCelula* aux;
+        
         if(celula1->anterior != nullptr)
             celula1->anterior->prox = celula2;
-        celula2->anterior = celula1->anterior;
         if(celula2->anterior != nullptr)
             celula2->anterior->prox = celula1;
         if(celula1->prox != nullptr)
             celula1->prox->anterior = celula2;
         if(celula2->prox != nullptr)
             celula2->prox->anterior = celula1;
-
-        TipoCelula* aux;
 
         aux = celula1->anterior;
         celula1->anterior = celula2->anterior;
