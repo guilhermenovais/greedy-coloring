@@ -16,7 +16,22 @@ void Sorting::bubbleSort(ListaEncadeada *lista) {
 }
 
 void Sorting::selectionSort(ListaEncadeada *lista) {
-
+    TipoCelula* elemento = lista->getPrimeiraCelula()->getProx();
+    while(elemento != nullptr) {
+        TipoCelula* min = elemento;
+        TipoCelula* iterador = elemento->getProx();
+        while (iterador != nullptr) {
+            if(iterador->item->getCor() < min->item->getCor() || (iterador->item->getCor() < min->item->getCor() && iterador->item->getChave() < min->item->getChave()))
+                min = iterador;
+            iterador = iterador->getProx();
+        }
+        if(elemento != min) {
+            TipoCelula* aux = min;
+            trocaCelulas(elemento, min);
+            elemento = aux;
+        }
+        elemento = elemento->getProx();
+    }
 }
 
 void Sorting::insertionSort(ListaEncadeada *lista) {
