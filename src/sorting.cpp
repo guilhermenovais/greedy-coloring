@@ -3,14 +3,14 @@
 void Sorting::bubbleSort(ListaEncadeada *lista) {
     int n = lista->getTamanho();
     for(int i = 0; i < n - 1; i++) {
-        TipoCelula* anterior = lista->getPrimeiraCelula()->getProx();
-        TipoCelula* atual = anterior->getProx();
+        TipoCelula* celula = lista->getPrimeiraCelula()->prox;
         for(int j = 1; j < n - i; j++) {
-            if(atual->getItem()->getCor() < anterior->getItem()->getCor()) {
-                
+            if(celula->prox->item->getCor() < celula->item->getCor()) {
+                TipoCelula* aux = celula->prox;
+                trocaCelulas(celula, celula->prox);
+                celula = aux;
             }
-            anterior = anterior->getProx();
-            atual = atual->getProx();
+            celula = celula->prox;
         }
     }
 }
