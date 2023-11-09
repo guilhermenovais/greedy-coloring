@@ -43,7 +43,9 @@ void ListaEncadeada::insereInicio(Vertice* item) {
     nova = new TipoCelula();
     nova->item = item;
     nova->prox = primeiro->prox;
+    nova->prox->anterior = nova;
     primeiro->prox = nova;
+    nova->anterior = primeiro;
     tamanho++;
     if(nova->prox == nullptr)
         ultimo = nova;
@@ -54,6 +56,7 @@ void ListaEncadeada::insereFinal(Vertice* item) {
     nova = new TipoCelula();
     nova->item = item;
     ultimo->prox = nova;
+    nova->anterior = ultimo;
     ultimo = nova;
     tamanho++;
 }
@@ -64,7 +67,9 @@ void ListaEncadeada::inserePosicao(Vertice* item, int pos) {
     nova = new TipoCelula();
     nova->item = item;
     nova->prox = p->prox;
+    nova->prox->anterior  = nova;
     p->prox = nova;
+    nova->anterior = p;
     tamanho++;
     if(nova->prox == nullptr)
         ultimo = nova;
@@ -77,6 +82,7 @@ Vertice* ListaEncadeada::removeInicio() {
         throw "ERRO: Lista vazia!";
     p = primeiro->prox;
     primeiro->prox = p->prox;
+    primeiro->prox->anterior = primeiro;
     tamanho--;
     if(primeiro->prox == nullptr)
         ultimo = primeiro;
@@ -109,6 +115,7 @@ Vertice* ListaEncadeada::removePosicao(int pos) {
     p = posiciona(pos, true);
     q = p->prox;
     p->prox = q->prox;
+    p->prox->anterior = p;
     tamanho--;
     aux = q->item;
     delete q;
