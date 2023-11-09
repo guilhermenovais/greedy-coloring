@@ -56,5 +56,5 @@ run: all
 	./bin/tp2.out
 
 test: all
-	valgrind --leak-check=full --show-leak-kinds=all ./bin/tp2.out
+	valgrind --leak-check=full --show-leak-kinds=all ./bin/tp2.out < teste.txt
 	gdb ./bin/tp2.out
