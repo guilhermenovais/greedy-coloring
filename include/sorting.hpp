@@ -1,6 +1,7 @@
 #ifndef SORTING_HPP
 #define SORTING_HPP
 
+#include "tipo_celula.hpp"
 #include "vertice.hpp"
 #include "lista_encadeada.hpp"
 
@@ -13,6 +14,8 @@ class Sorting {
         static void mergesort(ListaEncadeada* lista);
         static void heapsort(ListaEncadeada* lista);
         static void customSort(ListaEncadeada* lista);
+    private:
+        static void trocaCelulas(TipoCelula* celula1, TipoCelula* celula2);
 };
 
 #endif // SORTING_HPP
