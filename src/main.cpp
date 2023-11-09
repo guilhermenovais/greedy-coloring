@@ -25,6 +25,10 @@ int main(void) {
 
     grafo.ordena(tipoOrdenacao[0]);
 
-    std::cout << grafo.eGuloso();
+    bool eGuloso = grafo.eGuloso();
+    std::cout << eGuloso;
+    if(eGuloso) {
+        grafo.imprimeVertices();
+    }
     return 0;
 }
