@@ -21,7 +21,7 @@ void Sorting::selectionSort(ListaEncadeada *lista) {
         TipoCelula* min = elemento;
         TipoCelula* iterador = elemento->getProx();
         while (iterador != nullptr) {
-            if(iterador->item->getCor() < min->item->getCor() || (iterador->item->getCor() < min->item->getCor() && iterador->item->getChave() < min->item->getChave()))
+            if(iterador->item->getCor() < min->item->getCor() || (iterador->item->getCor() == min->item->getCor() && iterador->item->getChave() < min->item->getChave()))
                 min = iterador;
             iterador = iterador->getProx();
         }
