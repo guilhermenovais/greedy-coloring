@@ -9,6 +9,11 @@ Grafo::Grafo(int qtdVertices) {
 }
 
 Grafo::~Grafo() {
+    TipoCelula* celula = vertices->getPrimeiraCelula()->getProx();
+    while(celula != nullptr) {
+        delete celula->getItem();
+        celula = celula->getProx();
+    }
     delete vertices;
 }
 
