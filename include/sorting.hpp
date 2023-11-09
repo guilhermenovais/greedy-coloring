@@ -2,6 +2,7 @@
 #define SORTING_HPP
 
 #include "vertice.hpp"
+#include "lista_encadeada.hpp"
 
 class Sorting {
     public:
