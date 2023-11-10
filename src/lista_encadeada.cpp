@@ -169,3 +169,7 @@ TipoCelula* ListaEncadeada::getCelula(int pos) {
     p = posiciona(pos);
     return p;
 }
+
+TipoCelula* ListaEncadeada::getUltimaCelula() {
+    return ultimo;
+}

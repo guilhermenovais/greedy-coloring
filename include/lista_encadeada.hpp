@@ -24,6 +24,7 @@ class ListaEncadeada {
         void limpa();
         TipoCelula* getPrimeiraCelula();
         TipoCelula* getCelula(int pos);
+        TipoCelula* getUltimaCelula();
     private:
         int tamanho;
         TipoCelula* primeiro;
