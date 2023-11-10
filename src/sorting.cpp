@@ -16,21 +16,21 @@ void Sorting::bubbleSort(ListaEncadeada *lista) {
 }
 
 void Sorting::selectionSort(ListaEncadeada *lista) {
-    TipoCelula* elemento = lista->getPrimeiraCelula()->getProx();
+    TipoCelula* elemento = lista->getPrimeiraCelula()->prox;
     while(elemento != nullptr) {
         TipoCelula* min = elemento;
-        TipoCelula* iterador = elemento->getProx();
+        TipoCelula* iterador = elemento->prox;
         while (iterador != nullptr) {
             if(iterador->item->getCor() < min->item->getCor() || (iterador->item->getCor() == min->item->getCor() && iterador->item->getChave() < min->item->getChave()))
                 min = iterador;
-            iterador = iterador->getProx();
+            iterador = iterador->prox;
         }
         if(elemento != min) {
             TipoCelula* aux = min;
             trocaCelulas(elemento, min);
             elemento = aux;
         }
-        elemento = elemento->getProx();
+        elemento = elemento->prox;
     }
 }
 
@@ -46,8 +46,29 @@ void Sorting::insertionSort(ListaEncadeada *lista) {
     }
 }
 
-void Sorting::quicksort(ListaEncadeada *lista) {
+void Sorting::quicksort(TipoCelula* Esq, TipoCelula* Dir) {
+    if (Dir != nullptr && Esq != Dir && Esq != Dir->prox) {
+        TipoCelula* pivo = qsParticao(Esq, Dir);
+        quicksort(Esq, pivo->anterior);
+        quicksort(pivo->prox, Dir);
+    }
+}
 
+TipoCelula* Sorting::qsParticao(TipoCelula* Esq, TipoCelula* Dir) {
+    TipoCelula* pivo = Dir;
+    TipoCelula* i = Esq->anterior;
+
+    for (TipoCelula* j = Esq; j != Dir; j = j->prox) {
+        if (j->item->getCor() <= pivo->item->getCor()) {
+            i = (i == nullptr || i->item == nullptr) ? Esq : i->prox;
+            trocaCelulas(i, j);
+        }
+    }
+
+    i = (i == nullptr || i->item == nullptr) ? Esq : i->prox;
+    trocaCelulas(i, Dir);
+
+    return Dir;
 }
 
 void Sorting::mergesort(ListaEncadeada *lista) {
