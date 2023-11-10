@@ -35,7 +35,15 @@ void Sorting::selectionSort(ListaEncadeada *lista) {
 }
 
 void Sorting::insertionSort(ListaEncadeada *lista) {
-
+    int n = lista->getTamanho();
+    for(int i = 1; i < n; i++) {
+        TipoCelula* celula = lista->getCelula(i);
+        while(celula->anterior != nullptr) {
+            if(celula->anterior->item == nullptr) break;
+            if(celula->item->getCor() >= celula->anterior->item->getCor()) break;
+            trocaCelulas(celula, celula->anterior);
+        }
+    }
 }
 
 void Sorting::quicksort(ListaEncadeada *lista) {
