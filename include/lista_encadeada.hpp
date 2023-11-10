@@ -23,6 +23,7 @@ class ListaEncadeada {
         Vertice* pesquisa(int c);
         void limpa();
         TipoCelula* getPrimeiraCelula();
+        TipoCelula* getCelula(int pos);
     private:
         int tamanho;
         TipoCelula* primeiro;

@@ -163,3 +163,9 @@ bool ListaEncadeada::vazia() {
 TipoCelula* ListaEncadeada::getPrimeiraCelula() {
     return primeiro;
 }
+
+TipoCelula* ListaEncadeada::getCelula(int pos) {
+    TipoCelula* p;
+    p = posiciona(pos);
+    return p;
+}
