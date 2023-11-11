@@ -126,3 +126,16 @@ void Sorting::trocaCelulas(TipoCelula* celula1, TipoCelula* celula2) {
         celula2->prox = aux;
     }
 }
+
+TipoCelula* Sorting::getMeio(TipoCelula* Esq, TipoCelula* Dir) {
+    if (Esq == nullptr) {
+            return nullptr;
+        }
+        TipoCelula* pula_1 = Esq;
+        TipoCelula* pula_2 = Esq->prox;
+        while (pula_2 != Dir && pula_2->prox != Dir) {
+            pula_1 = pula_1->prox;
+            pula_2 = pula_2->prox->prox;
+        }
+        return pula_1;
+}

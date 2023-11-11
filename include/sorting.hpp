@@ -16,6 +16,7 @@ class Sorting {
         static void customSort(ListaEncadeada* lista);
     private:
         static void trocaCelulas(TipoCelula* celula1, TipoCelula* celula2);
+        static TipoCelula* getMeio(TipoCelula* Esq, TipoCelula* Dir);
         static TipoCelula* qsParticao(TipoCelula* Esq, TipoCelula* Dir);
 };
 
