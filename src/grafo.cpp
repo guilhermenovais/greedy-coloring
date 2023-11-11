@@ -20,7 +20,9 @@ void Grafo::addVertice(int rotulo, std::string strAdjacentes) {
     std::istringstream streamAdjacente(strAdjacentes);
     std::string strQtdAdjacentes, strRotuloVertice;
     streamAdjacente >> strQtdAdjacentes;
-    for(int i = 0; i < std::stoi(strQtdAdjacentes); i++) {
+    int qtdAdjacentes = std::stoi(strQtdAdjacentes);
+    vertices->getItem(rotulo)->getAdjacentes()->setCapacidade(qtdAdjacentes);
+    for(int i = 0; i < qtdAdjacentes; i++) {
         streamAdjacente >> strRotuloVertice;
         Vertice* verticeAdjacente = vertices->getItem(std::stoi(strRotuloVertice));
         vertice->getAdjacentes()->insereFinal(verticeAdjacente);
