@@ -8,7 +8,7 @@ class Lista {
     public:
         int getTamanho();
         bool vazia();
-        Lista();
+        Lista(int capacidadeInicial);
         ~Lista();
         Vertice* getItem(int pos);
         void setItem(Vertice* item, int pos);

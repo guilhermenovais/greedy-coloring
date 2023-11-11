@@ -1,9 +1,9 @@
 #include "../include/grafo.hpp"
 
 Grafo::Grafo(int qtdVertices) {
-    vertices = new Lista();
+    vertices = new Lista(qtdVertices);
     for(int i = 0; i < qtdVertices; i++) {
-        Vertice* novoVertice = new Vertice(i, 0, new Lista());
+        Vertice* novoVertice = new Vertice(i, 0, new Lista(0));
         vertices->insereFinal(novoVertice);
     }
 }

@@ -1,8 +1,8 @@
 #include "../include/lista.hpp"
 #include "../include/vertice.hpp"
 
-Lista::Lista() {
-    capacidade = 10;
+Lista::Lista(int capacidadeInicial) {
+    capacidade = capacidadeInicial;
     array = new Vertice*[capacidade];
     tamanho = 0;
 }
