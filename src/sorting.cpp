@@ -28,7 +28,17 @@ void Sorting::selectionSort(Lista *lista) {
 }
 
 void Sorting::insertionSort(Lista *lista) {
-    
+    int tamanho = lista->getTamanho();
+    Vertice* aux;
+    for (int i = 1; i < tamanho; i++) {
+        aux = lista->getItem(i);
+        int j = i - 1;
+        while (( j >= 0 ) && (aux->getCor() < lista->getItem(j)->getCor())) {
+            lista->setItem(lista->getItem(j), j + 1);
+            j--;
+        }
+        lista->setItem(aux, j + 1);
+    }
 }
 
 void Sorting::quicksort(Lista *lista) {
