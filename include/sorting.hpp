@@ -13,6 +13,8 @@ class Sorting {
         static void mergesort(Lista* lista);
         static void heapsort(Lista* lista);
         static void customSort(Lista* lista);
+    private:
+        static void troca(int indice1, int indice2, Lista* lista);
 };
 
 #endif // SORTING_HPP
