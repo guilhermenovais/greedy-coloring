@@ -67,8 +67,59 @@ void Sorting::qsParticao(int esq, int dir, int *i, int *j, Lista* lista) {
     } while (*i <= *j);
 }
 
-void Sorting::mergesort(Lista *lista) {
+void Sorting::mergesort(int esquerda, int direita, Lista* lista) {
+    if (esquerda < direita) {
+        int meio = esquerda + (direita - esquerda) / 2;
 
+        mergesort(esquerda, meio, lista);
+        mergesort(meio + 1, direita, lista);
+
+        merge(esquerda, direita, lista);
+    }
+}
+
+void Sorting::merge(int esquerda, int direita, Lista* lista) {
+    int meio = esquerda + (direita - esquerda) / 2;
+    int n1 = meio - esquerda + 1;
+    int n2 = direita - meio;
+
+    Lista* L = new Lista(n1);
+    Lista* R = new Lista(n2);
+
+    for (int i = 0; i < n1; i++)
+        L->insereFinal(lista->getItem(esquerda + i));
+    for (int j = 0; j < n2; j++)
+        R->insereFinal(lista->getItem(meio + 1 + j));
+
+    int i = 0;
+    int j = 0;
+    int k = esquerda;
+
+    while (i < n1 && j < n2) {
+        if (L->getItem(i)->getCor() <= R->getItem(j)->getCor()) {
+            lista->setItem(L->getItem(i), k);
+            i++;
+        } else {
+            lista->setItem(R->getItem(j), k);
+            j++;
+        }
+        k++;
+    }
+
+    while (i < n1) {
+        lista->setItem(L->getItem(i), k);
+        i++;
+        k++;
+    }
+
+    while (j < n2) {
+        lista->setItem(R->getItem(j), k);
+        j++;
+        k++;
+    }
+
+    delete L;
+    delete R;
 }
 
 void Sorting::heapsort(Lista *lista) {

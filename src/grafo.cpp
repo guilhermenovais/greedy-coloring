@@ -62,7 +62,7 @@ void Grafo::ordena(char tipoOrdenacao) {
             Sorting::quicksort(0, vertices->getTamanho() - 1, vertices);
             break;
         case 'm':
-            Sorting::mergesort(vertices);
+            Sorting::mergesort(0, vertices->getTamanho() - 1, vertices);
             break;
         case 'p':
             Sorting::heapsort(vertices);
