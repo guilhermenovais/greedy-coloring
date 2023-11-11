@@ -1,19 +1,17 @@
 #include "../include/grafo.hpp"
 
 Grafo::Grafo(int qtdVertices) {
-    vertices = new ListaEncadeada();
+    vertices = new Lista();
     for(int i = 0; i < qtdVertices; i++) {
-        Vertice* novoVertice = new Vertice(i, 0, new ListaEncadeada());
+        Vertice* novoVertice = new Vertice(i, 0, new Lista());
         vertices->insereFinal(novoVertice);
     }
 }
 
 Grafo::~Grafo() {
-    TipoCelula* celula = vertices->getPrimeiraCelula()->getProx();
-    while(celula != nullptr) {
-        delete celula->getItem();
-        celula = celula->getProx();
-    }
+    int tamanho = vertices->getTamanho();
+    for(int i = 0; i < tamanho; i++)
+        delete vertices->getItem(i);
     delete vertices;
 }
 
@@ -39,11 +37,10 @@ void Grafo::colore(std::string strCores) {
 }
 
 bool Grafo::eGuloso() {
-    TipoCelula* celula = vertices->getPrimeiraCelula()->getProx();
-    while(celula != nullptr) {
-        bool satisfaz = celula->getItem()->satisfazGuloso();
+    int tamanho = vertices->getTamanho();
+    for(int i = 0; i < tamanho; i++) {
+        bool satisfaz = vertices->getItem(i)->satisfazGuloso();
         if(!satisfaz) return false;
-        celula = celula->getProx();
     }
     return true;
 }
@@ -60,7 +57,7 @@ void Grafo::ordena(char tipoOrdenacao) {
             Sorting::insertionSort(vertices);
             break;
         case 'q':
-            Sorting::quicksort(vertices->getPrimeiraCelula()->getProx(), vertices->getUltimaCelula());
+            Sorting::quicksort(vertices);
             break;
         case 'm':
             Sorting::mergesort(vertices);
@@ -75,9 +72,7 @@ void Grafo::ordena(char tipoOrdenacao) {
 }
 
 void Grafo::imprimeVertices() {
-    TipoCelula* celula = vertices->getPrimeiraCelula()->getProx();
-    while(celula != nullptr) {
-        std::cout << ' ' << celula->getItem()->getChave();
-        celula = celula->getProx();
-    }
+    int tamanho = vertices->getTamanho();
+    for(int i = 0; i < tamanho; i++)
+        std::cout << ' ' << vertices->getItem(i)->getChave();
 }

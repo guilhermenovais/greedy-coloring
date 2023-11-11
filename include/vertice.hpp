@@ -1,20 +1,20 @@
 #ifndef VERTICE_HPP
 #define VERTICE_HPP
 
-// Forward declaration de ListaEncadeada
-class ListaEncadeada;
+// Forward declaration de Lista
+class Lista;
 
 class Vertice {
     public:
-        Vertice(int rotulo, int cor, ListaEncadeada* adjacentes);
+        Vertice(int rotulo = 0, int cor = 0, Lista* adjacentes = nullptr);
         ~Vertice();
         int getChave();
         int getCor();
         void setCor(int cor);
-        ListaEncadeada* getAdjacentes();
+        Lista* getAdjacentes();
         bool satisfazGuloso();
     private:
-        ListaEncadeada* adjacentes;
+        Lista* adjacentes;
         int rotulo;
         int cor;
 };

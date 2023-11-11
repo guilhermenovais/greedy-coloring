@@ -1,17 +1,15 @@
-#ifndef LISTA_ENCADEADA_HPP
-#define LISTA_ENCADEADA_HPP
-
-#include "tipo_celula.hpp"
+#ifndef LISTA_HPP
+#define LISTA_HPP
 
 // Forward declaration de Vertice
 class Vertice;
 
-class ListaEncadeada {
+class Lista {
     public:
         int getTamanho();
         bool vazia();
-        ListaEncadeada();
-        ~ListaEncadeada();
+        Lista();
+        ~Lista();
         Vertice* getItem(int pos);
         void setItem(Vertice* item, int pos);
         void insereInicio(Vertice* item);
@@ -22,14 +20,11 @@ class ListaEncadeada {
         Vertice* removePosicao(int pos);
         Vertice* pesquisa(int c);
         void limpa();
-        TipoCelula* getPrimeiraCelula();
-        TipoCelula* getCelula(int pos);
-        TipoCelula* getUltimaCelula();
     private:
+        Vertice** array;
+        int capacidade;
         int tamanho;
-        TipoCelula* primeiro;
-        TipoCelula* ultimo;
-        TipoCelula* posiciona(int pos, bool antes);
+        void redimensiona();      
 };
 
-#endif // LISTA_ENCADEADA_HPP
+#endif // LISTA_HPP

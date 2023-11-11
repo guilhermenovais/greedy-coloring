@@ -1,7 +1,7 @@
 #include "../include/vertice.hpp"
-#include "../include/lista_encadeada.hpp"
+#include "../include/lista.hpp"
 
-Vertice::Vertice(int rotulo, int cor, ListaEncadeada* adjacentes) {
+Vertice::Vertice(int rotulo, int cor, Lista* adjacentes) {
     this->rotulo = rotulo;
     this->cor = cor;
     this->adjacentes = adjacentes;
@@ -23,7 +23,7 @@ void Vertice::setCor(int cor) {
     this->cor = cor;
 }
 
-ListaEncadeada* Vertice::getAdjacentes() {
+Lista* Vertice::getAdjacentes() {
     return adjacentes;
 }
 
@@ -34,14 +34,13 @@ bool Vertice::satisfazGuloso() {
     for(int i = 0; i < cor - 1; i++) {
         coresMenores[i] = i + 1;
     }
-    TipoCelula* celula = adjacentes->getPrimeiraCelula()->getProx();
-    while (celula != nullptr) {
-        int corAdjacente = celula->getItem()->getCor();
+    int qtdAdjacentes = adjacentes->getTamanho();
+    for(int i = 0; i < qtdAdjacentes; i++) {
+        int corAdjacente = adjacentes->getItem(i)->getCor();
         if(corAdjacente < cor) {
             // zera posição da cor ao encontrá-la
             coresMenores[corAdjacente - 1] = 0;
         }
-        celula = celula->getProx();
     }
 
     // Verifica se alguma cor menor não foi encontrada

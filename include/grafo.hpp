@@ -1,7 +1,7 @@
 #ifndef GRAFO_HPP
 #define GRAFO_HPP
 
-#include "lista_encadeada.hpp"
+#include "lista.hpp"
 #include "vertice.hpp"
 #include <sstream>
 #include <string>
@@ -18,7 +18,7 @@ class Grafo {
         void ordena(char tipoOrdenacao);
         void imprimeVertices();
     private:
-        ListaEncadeada* vertices;
+        Lista* vertices;
 };
 
 #endif // GRAFO_HPP
