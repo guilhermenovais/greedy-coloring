@@ -41,16 +41,16 @@ void Sorting::insertionSort(Lista *lista) {
     }
 }
 
-void Sorting::quicksort(int esq, int dir, Lista* lista) {
+void Sorting::quicksort(int esq, int direita, Lista* lista) {
     int i, j;
-    qsParticao(esq, dir, &i, &j, lista);
+    qsParticao(esq, direita, &i, &j, lista);
     if (esq < j) quicksort(esq, j, lista);
-    if (i < dir) quicksort(i, dir, lista);
+    if (i < direita) quicksort(i, direita, lista);
 }
 
-void Sorting::qsParticao(int esq, int dir, int *i, int *j, Lista* lista) {
+void Sorting::qsParticao(int esq, int direita, int *i, int *j, Lista* lista) {
     *i = esq;
-    *j = dir;
+    *j = direita;
     Vertice* pivo = lista->getItem((*i + *j)/2);
     do {
         while(
@@ -67,21 +67,21 @@ void Sorting::qsParticao(int esq, int dir, int *i, int *j, Lista* lista) {
     } while (*i <= *j);
 }
 
-void Sorting::mergesort(int esquerda, int direita, Lista* lista) {
-    if (esquerda < direita) {
-        int meio = esquerda + (direita - esquerda) / 2;
+void Sorting::mergesort(int esquerda, int direitaeita, Lista* lista) {
+    if (esquerda < direitaeita) {
+        int meio = esquerda + (direitaeita - esquerda) / 2;
 
         mergesort(esquerda, meio, lista);
-        mergesort(meio + 1, direita, lista);
+        mergesort(meio + 1, direitaeita, lista);
 
-        merge(esquerda, direita, lista);
+        merge(esquerda, direitaeita, lista);
     }
 }
 
-void Sorting::merge(int esquerda, int direita, Lista* lista) {
-    int meio = esquerda + (direita - esquerda) / 2;
+void Sorting::merge(int esquerda, int direitaeita, Lista* lista) {
+    int meio = esquerda + (direitaeita - esquerda) / 2;
     int n1 = meio - esquerda + 1;
-    int n2 = direita - meio;
+    int n2 = direitaeita - meio;
 
     Lista* L = new Lista(n1);
     Lista* R = new Lista(n2);
@@ -123,7 +123,33 @@ void Sorting::merge(int esquerda, int direita, Lista* lista) {
 }
 
 void Sorting::heapsort(Lista *lista) {
+    int tamanho = lista->getTamanho();
 
+    for (int i = tamanho / 2 - 1; i >= 0; i--)
+        hsAjustaMax(lista, tamanho, i);
+
+    for (int i = tamanho - 1; i > 0; i--) {
+        troca(0, i, lista);
+        hsAjustaMax(lista, tamanho, i);
+        hsAjustaMax(lista, i, 0);
+    }
+}
+
+void Sorting::hsAjustaMax(Lista* lista, int tamanho, int indice) {
+    int indiceMaior = indice;
+    int filhoEsquerda = 2 * indice + 1;
+    int filhoDireita = 2 * indice + 2;
+
+    if (filhoEsquerda < tamanho && lista->getItem(filhoEsquerda) > lista->getItem(indiceMaior))
+        indiceMaior = filhoEsquerda;
+
+    if (filhoDireita < tamanho && lista->getItem(filhoDireita) > lista->getItem(indiceMaior))
+        indiceMaior = filhoDireita;
+
+    if (indiceMaior != indice) {
+        troca(indice, indiceMaior, lista);
+        hsAjustaMax(lista, tamanho, indiceMaior);
+    }
 }
 
 void Sorting::customSort(Lista *lista) {

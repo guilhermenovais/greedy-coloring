@@ -17,6 +17,7 @@ class Sorting {
         static void troca(int indice1, int indice2, Lista* lista);
         static void qsParticao(int esq, int dir, int *i, int *j, Lista* lista);
         static void merge(int esquerda, int direita, Lista* lista);
+        static void hsAjustaMax(Lista* lista, int tamanho, int indice);
 };
 
 #endif // SORTING_HPP
