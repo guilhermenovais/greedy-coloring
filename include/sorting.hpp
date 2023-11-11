@@ -9,12 +9,13 @@ class Sorting {
         static void bubbleSort(Lista* lista);
         static void selectionSort(Lista* lista);
         static void insertionSort(Lista* lista);
-        static void quicksort(Lista*);
+        static void quicksort(int esq, int dir, Lista* lista);
         static void mergesort(Lista* lista);
         static void heapsort(Lista* lista);
         static void customSort(Lista* lista);
     private:
         static void troca(int indice1, int indice2, Lista* lista);
+        static void qsParticao(int esq, int dir, int *i, int *j, Lista* lista);
 };
 
 #endif // SORTING_HPP

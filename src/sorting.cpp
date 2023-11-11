@@ -41,8 +41,30 @@ void Sorting::insertionSort(Lista *lista) {
     }
 }
 
-void Sorting::quicksort(Lista *lista) {
-    
+void Sorting::quicksort(int esq, int dir, Lista* lista) {
+    int i, j;
+    qsParticao(esq, dir, &i, &j, lista);
+    if (esq < j) quicksort(esq, j, lista);
+    if (i < dir) quicksort(i, dir, lista);
+}
+
+void Sorting::qsParticao(int esq, int dir, int *i, int *j, Lista* lista) {
+    *i = esq;
+    *j = dir;
+    Vertice* pivo = lista->getItem((*i + *j)/2);
+    do {
+        while(
+            pivo->getCor() > lista->getItem(*i)->getCor() ||
+            (pivo->getCor() == lista->getItem(*i)->getCor() &&
+               pivo->getChave() > lista->getItem(*i)->getChave())) (*i)++;
+        while(pivo->getCor() < lista->getItem(*j)->getCor() ||
+            (pivo->getCor() == lista->getItem(*j)->getCor() &&
+               pivo->getChave() < lista->getItem(*j)->getChave())) (*j)--;
+        if (*i <= *j) {
+            troca(*i, *j, lista);
+            (*i)++; (*j)--;
+        }
+    } while (*i <= *j);
 }
 
 void Sorting::mergesort(Lista *lista) {
