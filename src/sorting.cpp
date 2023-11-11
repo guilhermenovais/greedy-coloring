@@ -9,7 +9,22 @@ void Sorting::bubbleSort(Lista *lista) {
 }
 
 void Sorting::selectionSort(Lista *lista) {
-    
+    int min, tamanho;
+    tamanho = lista->getTamanho();
+    for (int i = 0; i < tamanho - 1; i++) {
+        min = i;
+        for (int j = i + 1 ; j < tamanho; j++) {
+            if(lista->getItem(j)->getCor() <= lista->getItem(min)->getCor()) {
+                if(lista->getItem(j)->getCor() == lista->getItem(min)->getCor()) {
+                    // Caso as cores sejam iguais, verifica as chaves
+                    if(lista->getItem(j)->getChave() < lista->getItem(min)->getChave())
+                        min = j;
+                } else
+                    min = j;
+            }
+        }
+        troca(i, min, lista);
+    }
 }
 
 void Sorting::insertionSort(Lista *lista) {
