@@ -118,8 +118,17 @@ void Lista::redimensiona() {
         novoArray[i] = array[i];
     }
 
-    delete[] array;
+    if(array != nullptr)
+        delete[] array;
 
     array = novoArray;
     capacidade = novaCapacidade;
+}
+
+void Lista::setCapacidade(int novaCapacidade) {
+    if(array != nullptr)
+        delete[] array;
+    array = new Vertice*[novaCapacidade];
+    capacidade = novaCapacidade;
+    tamanho = 0;
 }

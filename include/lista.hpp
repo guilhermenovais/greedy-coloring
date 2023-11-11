@@ -20,6 +20,7 @@ class Lista {
         Vertice* removePosicao(int pos);
         Vertice* pesquisa(int c);
         void limpa();
+        void setCapacidade(int novaCapacidade);
     private:
         Vertice** array;
         int capacidade;
