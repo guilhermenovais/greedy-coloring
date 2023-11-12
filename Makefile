@@ -50,7 +50,7 @@ clean:
 	rm -f $(EXE) $(OBJS) gmon.out
 
 run: all
-	./bin/tp2.out
+	./bin/tp2.out < teste.txt
 
 test: all
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./bin/tp2.out < teste.txt
