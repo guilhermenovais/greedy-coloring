@@ -30,25 +30,31 @@ Lista* Vertice::getAdjacentes() {
 bool Vertice::satisfazGuloso() {
     if(cor == 0)
         throw "A cor ainda não foi definida";
+
+    // Inicializa o array com as cores que devem estar ligadas ao vértice
     int coresMenores[cor - 1];
     for(int i = 0; i < cor - 1; i++) {
         coresMenores[i] = i + 1;
     }
+
+    int coresFaltantes = cor - 1;
+
+    if(coresFaltantes == 0)
+        return true;
+    
     int qtdAdjacentes = adjacentes->getTamanho();
     for(int i = 0; i < qtdAdjacentes; i++) {
         int corAdjacente = adjacentes->getItem(i)->getCor();
-        if(corAdjacente < cor) {
+        if(corAdjacente < cor && coresMenores[corAdjacente - 1] != 0) {
             // Zera posição da cor ao encontrá-la
             coresMenores[corAdjacente - 1] = 0;
+            // Decrementa a variável de cores faltantes
+            coresFaltantes--;
+            // Verifica se já achou todas as cores
+            if(coresFaltantes <= 0)
+                return true;
         }
     }
 
-    // Verifica se alguma cor menor não foi encontrada
-    for(int i = 0; i < cor - 1; i++) {
-        if(coresMenores[i] != 0)
-            return false;
-    }
-
-    // Retorna true caso todas tenha sido encontradas;
-    return true;
+    return false;
 }
