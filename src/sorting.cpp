@@ -153,7 +153,56 @@ void Sorting::hsAjustaMax(Lista* lista, int tamanho, int indice) {
 }
 
 void Sorting::customSort(Lista *lista) {
+    int maximo = rsEncontraMax(lista);
+
+    for (int exp = 1; maximo / exp > 0; exp *= 10)
+        rsOrdenaPorDigito(lista, exp);
+}
+
+int Sorting::rsEncontraMax(Lista* lista) {
+    int maximo = lista->getItem(0)->getCor();
+    int tamanho = lista->getTamanho();
+    for (int i = 1; i < tamanho; i++) {
+        if(lista->getItem(i)->getCor() > maximo) {
+            maximo = lista->getItem(i)->getCor();
+        }
+    }
+    return maximo;
+}
+
+void Sorting::rsOrdenaPorDigito(Lista* lista, int exp) {
+    const int tamanho = lista->getTamanho();
+    const int base = 10;
+
+    // Cria e inicializa lista onde será armazenado o resultado
+    Lista* resultado = new Lista(tamanho);
+    for(int i = 0; i < tamanho; i++)
+        resultado->insereFinal(lista->getItem(i));
     
+    // Cria e inicializa arra de contagem de dígitos
+    int contagemDigitos[base];
+    for(int i = 0; i < base; i++)
+        contagemDigitos[i] = 0;
+
+    // Faz a contagem das ocorrências de cada dígito
+    for(int i = 0; i < tamanho; i++)
+        contagemDigitos[(lista->getItem(i)->getCor() / exp) % base]++;
+
+    // Acumula a contagem
+    for(int i = 1; i < base; i++)
+        contagemDigitos[i] += contagemDigitos[i - 1];
+
+    // Cria a lista ordenada
+    for(int i = tamanho - 1; i >= 0; i--) {
+        resultado->setItem(lista->getItem(i), contagemDigitos[(lista->getItem(i)->getCor() / exp) % base] - 1);
+        contagemDigitos[(lista->getItem(i)->getCor() / exp) % base]--;
+    }
+
+    // Copia a lista ordenada para a lista principal
+    for(int i = 0; i < tamanho; i++)
+        lista->setItem(resultado->getItem(i), i);
+
+    delete resultado;
 }
 
 void Sorting::troca(int indice1, int indice2, Lista* lista) {
