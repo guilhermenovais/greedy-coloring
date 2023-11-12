@@ -138,31 +138,49 @@ void Sorting::merge(int esquerda, int direita, Lista* lista) {
 void Sorting::heapsort(Lista *lista) {
     int tamanho = lista->getTamanho();
 
-    // Constrói o heap
-    for (int i = tamanho / 2 - 1; i >= 0; i--)
-        hsAjustaMax(lista, tamanho, i);
+    hsConstroiMax(lista);
 
-    // Ordena a lista
-    for (int i = tamanho - 1; i > 0; i--) {
-        troca(0, i, lista);
-        hsAjustaMax(lista, tamanho, i);
-        hsAjustaMax(lista, i, 0);
+    for (int indice = tamanho - 1; indice > 0; indice--) {
+        // Move a raiz atual para o final
+        troca(0, indice, lista);
+
+        // Chama hsAjustaMax no heap reduzido
+        hsAjustaMax(lista, indice, 0);
     }
 }
 
-void Sorting::hsAjustaMax(Lista* lista, int tamanho, int indice) {
-    int indiceMaior = indice;
-    int filhoEsquerda = 2 * indice + 1;
-    int filhoDireita = 2 * indice + 2;
+void Sorting::hsConstroiMax(Lista* lista) {
+    int tamanho = lista->getTamanho();
 
-    if (filhoEsquerda < tamanho && lista->getItem(filhoEsquerda) > lista->getItem(indiceMaior))
-        indiceMaior = filhoEsquerda;
+    // Constrói o heap (reorganiza a lista)
+    for(int indice = tamanho / 2 - 1; indice >= 0; indice--)
+        hsAjustaMax(lista, tamanho, indice);
+}
 
-    if (filhoDireita < tamanho && lista->getItem(filhoDireita) > lista->getItem(indiceMaior))
-        indiceMaior = filhoDireita;
+void Sorting::hsAjustaMax(Lista* lista, int tamanho, int indiceRaiz) {
+    int indiceMaior = indiceRaiz;
+    int indiceFilhoEsquerda = 2 * indiceRaiz + 1;
+    int indiceFilhoDireita = 2 * indiceRaiz + 2;
 
-    if (indiceMaior != indice) {
-        troca(indice, indiceMaior, lista);
+    /* Caso a cor do filho à esquerda seja maior ou as cores sejam iguais mas o filho à esquerda tenha
+    chave maior*/
+    if (indiceFilhoEsquerda < tamanho && lista->getItem(indiceFilhoEsquerda)->getCor() > lista->getItem(indiceMaior)->getCor())
+        indiceMaior = indiceFilhoEsquerda;
+    else if (indiceFilhoEsquerda < tamanho && lista->getItem(indiceFilhoEsquerda)->getCor() == lista->getItem(indiceMaior)->getCor() &&
+            lista->getItem(indiceFilhoEsquerda)->getChave() > lista->getItem(indiceMaior)->getChave())
+        indiceMaior = indiceFilhoEsquerda;
+
+    /* Caso a cor do filho à direita seja maior ou as cores sejam iguais mas o filho à direita tenha
+    chave maior*/
+    if (indiceFilhoDireita < tamanho && lista->getItem(indiceFilhoDireita)->getCor() > lista->getItem(indiceMaior)->getCor())
+        indiceMaior = indiceFilhoDireita;
+    else if (indiceFilhoDireita < tamanho && lista->getItem(indiceFilhoDireita)->getCor() == lista->getItem(indiceMaior)->getCor() &&
+            lista->getItem(indiceFilhoDireita)->getChave() > lista->getItem(indiceMaior)->getChave())
+        indiceMaior = indiceFilhoDireita;
+
+    if (indiceMaior != indiceRaiz) {
+        troca(indiceRaiz, indiceMaior, lista);
+
         hsAjustaMax(lista, tamanho, indiceMaior);
     }
 }
