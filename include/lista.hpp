@@ -18,7 +18,7 @@ class Lista {
         Vertice* removeInicio();
         Vertice* removeFinal();
         Vertice* removePosicao(int pos);
-        Vertice* pesquisa(int c);
+        Vertice* pesquisa(int chave);
         void limpa();
         void setCapacidade(int novaCapacidade);
     private:

@@ -38,7 +38,7 @@ bool Vertice::satisfazGuloso() {
     for(int i = 0; i < qtdAdjacentes; i++) {
         int corAdjacente = adjacentes->getItem(i)->getCor();
         if(corAdjacente < cor) {
-            // zera posição da cor ao encontrá-la
+            // Zera posição da cor ao encontrá-la
             coresMenores[corAdjacente - 1] = 0;
         }
     }

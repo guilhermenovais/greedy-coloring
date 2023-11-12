@@ -41,93 +41,108 @@ void Sorting::insertionSort(Lista *lista) {
     }
 }
 
-void Sorting::quicksort(int esq, int direita, Lista* lista) {
+void Sorting::quicksort(int esquerda, int direita, Lista* lista) {
     int i, j;
-    qsParticao(esq, direita, &i, &j, lista);
-    if (esq < j) quicksort(esq, j, lista);
+    qsParticao(esquerda, direita, &i, &j, lista);
+    if (esquerda < j) quicksort(esquerda, j, lista);
     if (i < direita) quicksort(i, direita, lista);
 }
 
-void Sorting::qsParticao(int esq, int direita, int *i, int *j, Lista* lista) {
-    *i = esq;
+void Sorting::qsParticao(int esquerda, int direita, int *i, int *j, Lista* lista) {
+    *i = esquerda;
     *j = direita;
     Vertice* pivo = lista->getItem((*i + *j)/2);
     do {
+        /* Procura um elemento que tenha a cor menor que a do pivô
+        ou que tenha a mesma cor mas tenha chave menor */
         while(
             pivo->getCor() > lista->getItem(*i)->getCor() ||
             (pivo->getCor() == lista->getItem(*i)->getCor() &&
-               pivo->getChave() > lista->getItem(*i)->getChave())) (*i)++;
-        while(pivo->getCor() < lista->getItem(*j)->getCor() ||
+            pivo->getChave() > lista->getItem(*i)->getChave())
+        ) (*i)++;
+
+        /* Procura um elemento que tenha a cor maior que a do pivô
+        ou que tenha a mesma cor mas tenha chave maior */
+        while(
+            pivo->getCor() < lista->getItem(*j)->getCor() ||
             (pivo->getCor() == lista->getItem(*j)->getCor() &&
-               pivo->getChave() < lista->getItem(*j)->getChave())) (*j)--;
+            pivo->getChave() < lista->getItem(*j)->getChave())
+        ) (*j)--;
+
+        // Troca os dois elementos
         if (*i <= *j) {
             troca(*i, *j, lista);
-            (*i)++; (*j)--;
+            (*i)++;
+            (*j)--;
         }
     } while (*i <= *j);
 }
 
-void Sorting::mergesort(int esquerda, int direitaeita, Lista* lista) {
-    if (esquerda < direitaeita) {
-        int meio = esquerda + (direitaeita - esquerda) / 2;
+void Sorting::mergesort(int esquerda, int direita, Lista* lista) {
+    if (esquerda < direita) {
+        int meio = esquerda + (direita - esquerda) / 2;
 
         mergesort(esquerda, meio, lista);
-        mergesort(meio + 1, direitaeita, lista);
+        mergesort(meio + 1, direita, lista);
 
-        merge(esquerda, direitaeita, lista);
+        merge(esquerda, direita, lista);
     }
 }
 
-void Sorting::merge(int esquerda, int direitaeita, Lista* lista) {
-    int meio = esquerda + (direitaeita - esquerda) / 2;
-    int n1 = meio - esquerda + 1;
-    int n2 = direitaeita - meio;
+void Sorting::merge(int esquerda, int direita, Lista* lista) {
+    int meio = esquerda + (direita - esquerda) / 2;
+    int tamanhoEsq = meio - esquerda + 1;
+    int tamanhoDir = direita - meio;
 
-    Lista* L = new Lista(n1);
-    Lista* R = new Lista(n2);
+    Lista* listaEsq = new Lista(tamanhoEsq);
+    Lista* listaDir = new Lista(tamanhoDir);
 
-    for (int i = 0; i < n1; i++)
-        L->insereFinal(lista->getItem(esquerda + i));
-    for (int j = 0; j < n2; j++)
-        R->insereFinal(lista->getItem(meio + 1 + j));
+    // Copia os itens para suas respectivas listas
+    for (int i = 0; i < tamanhoEsq; i++)
+        listaEsq->insereFinal(lista->getItem(esquerda + i));
+    for (int j = 0; j < tamanhoDir; j++)
+        listaDir->insereFinal(lista->getItem(meio + 1 + j));
 
     int i = 0;
     int j = 0;
     int k = esquerda;
 
-    while (i < n1 && j < n2) {
-        if (L->getItem(i)->getCor() <= R->getItem(j)->getCor()) {
-            lista->setItem(L->getItem(i), k);
+    // Guarda os items das duas listas na lista principal do menor para o maior
+    while (i < tamanhoEsq && j < tamanhoDir) {
+        if (listaEsq->getItem(i)->getCor() <= listaDir->getItem(j)->getCor()) {
+            lista->setItem(listaEsq->getItem(i), k);
             i++;
         } else {
-            lista->setItem(R->getItem(j), k);
+            lista->setItem(listaDir->getItem(j), k);
             j++;
         }
         k++;
     }
 
-    while (i < n1) {
-        lista->setItem(L->getItem(i), k);
+    // Guarda os itens que sobraram nas listas
+    while (i < tamanhoEsq) {
+        lista->setItem(listaEsq->getItem(i), k);
         i++;
         k++;
     }
-
-    while (j < n2) {
-        lista->setItem(R->getItem(j), k);
+    while (j < tamanhoDir) {
+        lista->setItem(listaDir->getItem(j), k);
         j++;
         k++;
     }
 
-    delete L;
-    delete R;
+    delete listaEsq;
+    delete listaDir;
 }
 
 void Sorting::heapsort(Lista *lista) {
     int tamanho = lista->getTamanho();
 
+    // Constrói o heap
     for (int i = tamanho / 2 - 1; i >= 0; i--)
         hsAjustaMax(lista, tamanho, i);
 
+    // Ordena a lista
     for (int i = tamanho - 1; i > 0; i--) {
         troca(0, i, lista);
         hsAjustaMax(lista, tamanho, i);
@@ -155,6 +170,7 @@ void Sorting::hsAjustaMax(Lista* lista, int tamanho, int indice) {
 void Sorting::customSort(Lista *lista) {
     int maximo = rsEncontraMax(lista);
 
+    // Ordena a lista dígito a dígito
     for (int exp = 1; maximo / exp > 0; exp *= 10)
         rsOrdenaPorDigito(lista, exp);
 }

@@ -2,6 +2,8 @@
 
 Grafo::Grafo(int qtdVertices) {
     vertices = new Lista(qtdVertices);
+
+    // Inicializa lista com vértices de cor e lista de adjacentes nulos
     for(int i = 0; i < qtdVertices; i++) {
         Vertice* novoVertice = new Vertice(i, 0, new Lista(0));
         vertices->insereFinal(novoVertice);
@@ -9,6 +11,7 @@ Grafo::Grafo(int qtdVertices) {
 }
 
 Grafo::~Grafo() {
+    // Exclui todos os vértices e apaga a lista
     int tamanho = vertices->getTamanho();
     for(int i = 0; i < tamanho; i++)
         delete vertices->getItem(i);
@@ -16,6 +19,7 @@ Grafo::~Grafo() {
 }
 
 void Grafo::addVertice(int rotulo, std::string strAdjacentes) {
+    // Cria o vetor de vértices adjacentes associado ao vértice
     Vertice* vertice = vertices->getItem(rotulo);
     std::istringstream streamAdjacente(strAdjacentes);
     std::string strQtdAdjacentes, strRotuloVertice;
@@ -30,6 +34,7 @@ void Grafo::addVertice(int rotulo, std::string strAdjacentes) {
 }
 
 void Grafo::colore(std::string strCores) {
+    // Armazena as cores de cara vértice
     std::istringstream streamCores(strCores);
     std::string strCor;
     for(int i = 0; i < vertices->getTamanho(); i++) {
@@ -39,6 +44,7 @@ void Grafo::colore(std::string strCores) {
 }
 
 bool Grafo::eGuloso() {
+    // Verifica se todos os vértices satisfazem a condição para ser guloso
     int tamanho = vertices->getTamanho();
     for(int i = 0; i < tamanho; i++) {
         bool satisfaz = vertices->getItem(i)->satisfazGuloso();
