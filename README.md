@@ -1,4 +1,4 @@
-# Logic Expressions Evaluator
+# Greedy Coloring Checker
 
 ## About
 This project implements an algorithm that receives a graph with a coloring and defines whether or not the coloring of this graph can be obtained using a greedy algorithm. Furthermore, the prerequisite for the problem is to order the vertices of the graph before checking whether or not it is greedy. The sorting methods Bubble sort, Selection sort, Insertion sort, Quick sort, Merge sort, Heap sort and Radix sort were implemented.
